@@ -1,0 +1,52 @@
+<!-- BEGIN: Firebase configuration -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script>
+    // Initialize Firebase
+    var firebaseConfig = {
+        apiKey: "AIzaSyBy6FYvIIjWNaR5wOrv72FTRmL-V9idqiw",
+    authDomain: "ecom-50c7d.firebaseapp.com",
+    databaseURL: "https://ecom-50c7d-default-rtdb.firebaseio.com",
+    projectId: "ecom-50c7d",
+    storageBucket: "ecom-50c7d.appspot.com",
+    messagingSenderId: "397555641492",
+    appId: "1:397555641492:web:8eeecce4fd2de424cd1881",
+    measurementId: "G-ZQNJE7JMJ6"
+    };
+    firebase.initializeApp(firebaseConfig);
+</script>
+<!-- END: Firebase configuration -->
+
+<!-- BEGIN: User authentication form -->
+<form id="loginForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="submit">Login</button>
+</form>
+<!-- END: User authentication form -->
+
+<script>
+    // Handle form submission
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        // Sign in with email and password
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function(userCredential) {
+                // User signed in
+                var user = userCredential.user;
+                console.log("User details:", user);
+            })
+            .catch(function(error) {
+                // Handle errors
+                console.log("Error:", error.message);
+            });
+    });
+</script>
